@@ -9,7 +9,7 @@
 
   function parseTheme(value){
     const parts = (value || 'forest-light').split('-');
-    return { family: parts[0] || 'forest', mode: parts[1] || 'light' };
+    return { family: parts[0] || 'forest', mode: parts[1] || 'dark' };
   }
 
   function currentTheme(){

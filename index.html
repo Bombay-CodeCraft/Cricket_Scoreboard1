@@ -10,13 +10,15 @@
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem('vpl-theme') || 'forest-light';
+          var saved = localStorage.getItem('vpl-theme') || 'forest-dark';
           document.documentElement.setAttribute('data-theme', saved);
         } catch (e) {}
       })();
     </script>
 </head>
 <body>
+    <!-- ADD THIS LINE: Particle JS Canvas Background -->
+    <canvas id="netCanvas"></canvas>
     <header class="header">
         <div class="container">
             <div class="logo">

@@ -2583,3 +2583,98 @@ async function undoLastBall() {
     showMessage('Last ball undone.');
 }
 document.getElementById("hard-refresh-btn").addEventListener("click", () => location.reload(true));
+
+// ========================================
+// PARTICLE NETWORK BACKGROUND
+// ========================================
+(function networkCanvas() {
+    const canvas = document.getElementById('netCanvas');
+    if (!canvas) return; // Failsafe if canvas is missing
+    const ctx = canvas.getContext('2d');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+  
+    let width, height, nodes;
+    const NODE_COUNT = 60; // Slightly reduced from 100 for better mobile scoring performance
+    const LINK_DIST = 200;
+  
+    // Reads the current theme color from style.css
+    function readParticleRGB() {
+      const raw = getComputedStyle(document.documentElement).getPropertyValue('--particle-rgb').trim();
+      const parts = raw.split(',').map(n => parseInt(n.trim(), 10));
+      if (parts.length === 3 && parts.every(n => !isNaN(n))) {
+        return { r: parts[0], g: parts[1], b: parts[2] };
+      }
+      return { r: 255, g: 255, b: 255 }; // Fallback
+    }
+  
+    let particleRGB = readParticleRGB();
+  
+    // Watch the <html> tag for data-theme changes to instantly flip particle colors
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          particleRGB = readParticleRGB();
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+  
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+  
+    function makeNodes() {
+      nodes = Array.from({ length: NODE_COUNT }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3
+      }));
+    }
+  
+    function step() {
+      ctx.clearRect(0, 0, width, height);
+  
+      nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+  
+        // Bounce particles off the edges
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+  
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgb(${particleRGB.r}, ${particleRGB.g}, ${particleRGB.b})`;
+        ctx.fill();
+      });
+  
+      // Draw connecting lines
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < LINK_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(${particleRGB.r}, ${particleRGB.g}, ${particleRGB.b}, ${1 - dist / LINK_DIST})`;
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+          }
+        }
+      }
+  
+      requestAnimationFrame(step);
+    }
+  
+    window.addEventListener('resize', resize);
+    
+    // Initialize
+    resize();
+    makeNodes();
+    step();
+  })();
