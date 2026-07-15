@@ -2621,8 +2621,23 @@ document.getElementById("hard-refresh-btn").addEventListener("click", () => loca
     observer.observe(document.documentElement, { attributes: true });
   
     function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      // 1. Get the screen's pixel density (fallback to 1 for standard monitors)
+      const dpr = window.devicePixelRatio || 1;
+      
+      // 2. Get the actual screen dimensions in CSS pixels
+      width = window.innerWidth;
+      height = window.innerHeight;
+      
+      // 3. Multiply the internal canvas resolution by the DPR for crisp rendering
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      
+      // 4. Force the physical display size to match the screen using CSS
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      
+      // 5. Scale the drawing context up so we don't have to rewrite the animation math
+      ctx.scale(dpr, dpr);
     }
   
     function makeNodes() {
