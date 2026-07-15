@@ -7,12 +7,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="VPL_logo.jpeg" type="image/x-icon">
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('vpl-theme') || 'forest-light';
+          document.documentElement.setAttribute('data-theme', saved);
+        } catch (e) {}
+      })();
+    </script>
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="logo">
                 <h1>🏏 VrindaOne Premiere League</h1>
+            </div>
+
+            <div class="theme-switcher">
+                <div class="theme-swatches" id="themeSwatches">
+                    <button class="theme-swatch" type="button" data-family="forest" title="Forest theme"></button>
+                    <button class="theme-swatch" type="button" data-family="ocean" title="Ocean theme"></button>
+                    <button class="theme-swatch" type="button" data-family="crimson" title="Crimson theme"></button>
+                </div>
+                <button id="modeToggle" class="mode-toggle-btn" type="button" title="Toggle light / dark mode">🌙</button>
             </div>
 
             <button id="mobileMenuToggle" class="mobile-menu-toggle" type="button" title="Toggle mobile menu">
@@ -119,7 +136,7 @@
                             <tbody id="firstInningsBattingBody"></tbody>
                             <tfoot id="firstInningsBattingFooter"></tfoot>
                         </table>
-                        <table class="scorecard-table" style="margin-top:0.5rem">
+                        <table class="scorecard-table">
                             <thead><tr><th>Bowler</th><th>O</th><th>M</th><th>R</th><th>W</th><th>Econ</th><th>WD</th><th>NB</th></tr></thead>
                             <tbody id="firstInningsBowlingBody"></tbody>
                         </table>
@@ -749,6 +766,7 @@
 
     <!-- Supabase JS client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="theme.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

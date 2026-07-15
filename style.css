@@ -43,6 +43,7 @@
   /* Neutrals — the backbone */
   --white:     #f5f4f1;   /* off-white, slightly toned down */
   --paper:     #ede9e3;   /* warm stone, noticeably less glaring */
+  --text-on-dark: #f5f4f1; /* fixed bright text for header/buttons/badges — always light regardless of mode, since those surfaces stay dark-toned in every theme */
   --gray-50:   #e8e5df;
   --gray-100:  #dedad2;
   --gray-200:  #cec9bf;
@@ -77,6 +78,109 @@
   --border:       #e4e2da;
   --border-dark:  #ccc9be;
   --border-green: #a8d4b6;
+
+  /* Badge tints — role chips, over-ball indicators, status pills */
+  --badge-green-bg:     #dceae0;
+  --badge-red-bg:       #f0d0d0;
+  --badge-red-border:   #d89090;
+  --badge-gold-bg:      #f0e4c0;
+  --badge-gold-border:  #d8c070;
+  --badge-blue-bg:      #d8e8f8;
+  --badge-blue-bg-hover:#c0d8f0;
+  --badge-blue-border:  #a8c8e8;
+  --amber-700:          #c16505;
+
+  /* Theme transition */
+  --theme-transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME SYSTEM
+   Two axes: family (forest / ocean / crimson) × mode (light / dark)
+   Applied via <html data-theme="family-mode">
+   "forest-light" is the original default and needs no override block.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── FOREST · DARK ──────────────────────────────────────────── */
+html[data-theme="forest-dark"] {
+  --green-900: #081720; --green-800: #0f1c2a; --green-700: #6fa8c9;
+  --green-600: #7fb6d4; --green-500: #8fc3de; --green-400: #5a9bc0;
+  --green-100: #132735; --green-50: #0e1c26;
+  --border-green: #1e3a4a;
+  --badge-green-bg: #122b38;
+}
+
+/* ── OCEAN · LIGHT ───────────────────────────────────────────── */
+html[data-theme="ocean-light"] {
+  --green-900: #052e35; --green-800: #0a4a52; --green-700: #0d7a86;
+  --green-600: #1394a1; --green-500: #1aacba; --green-400: #33c6d4;
+  --green-100: #e0f7f9; --green-50: #f1fcfd;
+  --border-green: #a6dde3;
+  --badge-green-bg: #d7f0f2;
+}
+
+/* ── OCEAN · DARK ────────────────────────────────────────────── */
+html[data-theme="ocean-dark"] {
+  --green-900: #02181c; --green-800: #062a30; --green-700: #5cd6e3;
+  --green-600: #71dfea; --green-500: #8ce6ef; --green-400: #3ec2d1;
+  --green-100: #0c2e33; --green-50: #081f23;
+  --border-green: #164a52;
+  --badge-green-bg: #0c2e33;
+}
+
+/* ── CRIMSON · LIGHT ─────────────────────────────────────────── */
+html[data-theme="crimson-light"] {
+  --green-900: #2b0d10; --green-800: #4a1116; --green-700: #7d1e25;
+  --green-600: #96242c; --green-500: #b02b33; --green-400: #c8404a;
+  --green-100: #fbe4e6; --green-50: #fdf1f2;
+  --border-green: #e0adb2;
+  --badge-green-bg: #f8dbde;
+}
+
+/* ── CRIMSON · DARK ──────────────────────────────────────────── */
+html[data-theme="crimson-dark"] {
+  --green-900: #170708; --green-800: #2c0d10; --green-700: #e2848c;
+  --green-600: #e99aa0; --green-500: #eeadb2; --green-400: #d6606a;
+  --green-100: #341215; --green-50: #250d0f;
+  --border-green: #3d1e22;
+  --badge-green-bg: #33161a;
+}
+
+/* ── Shared DARK-mode neutrals & alert colors ─────────────────
+   Applies to all three families once mode is dark, so page bg,
+   text, borders, and status pills all invert consistently.       */
+html[data-theme$="-dark"] {
+  --gold-700: #e0b354; --gold-600: #e8bf6c; --gold-500: #eecb84;
+  --gold-400: #f2d69e; --gold-100: #302711;
+
+  --red-600: #f18585; --red-500: #f5a3a3; --red-100: #3a1f1f;
+  --amber-600: #e3a856; --amber-100: #362a14; --amber-700: #c98a2e;
+  --blue-600: #8fa8ea; --blue-100: #1c2440;
+
+  --white: #1b1f24; --paper: #121519;
+  --gray-50: #1d2126; --gray-100: #23282e; --gray-200: #2b3138;
+  --gray-300: #3a424b; --gray-400: #8b95a1; --gray-500: #a7b0ba;
+  --gray-600: #c3cad2; --gray-700: #dde1e6; --gray-800: #eef0f2;
+  --gray-900: #f7f8f9;
+
+  --border: #2a3038; --border-dark: #3a424b;
+
+  --badge-red-bg: #3a1c1c; --badge-red-border: #5c2a2a;
+  --badge-gold-bg: #362a12; --badge-gold-border: #5c4620;
+  --badge-blue-bg: #182a3c; --badge-blue-bg-hover: #1f3550;
+  --badge-blue-border: #2f4d6c;
+
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.35);
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.45), 0 8px 32px rgba(0,0,0,0.3);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,0.5), 0 16px 48px rgba(0,0,0,0.35);
+}
+
+/* Smooth cross-fade whenever the theme changes */
+body, .header, .public-team-header, .nav-btn, .btn, .modal-content,
+.modal-box, .match-details, .public-team-card, .over-ball, .scorecard-table {
+  transition: var(--theme-transition);
 }
 
 /* ── Reset & Base ───────────────────────────────────────────── */
@@ -154,7 +258,7 @@ body {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1;
-  color: var(--white);
+  color: var(--text-on-dark);
   white-space: nowrap;
 }
 
@@ -184,7 +288,7 @@ body {
 }
 
 .nav-btn:hover {
-  color: var(--white);
+  color: var(--text-on-dark);
   background: rgba(255,255,255,0.1);
 }
 
@@ -217,6 +321,73 @@ body {
   background: var(--gold-500);
   color: var(--green-900);
   border-color: var(--gold-500);
+}
+
+/* ── Theme switcher ─────────────────────────────────────────── */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 8px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255,255,255,0.18);
+}
+
+.theme-swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.35);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.theme-swatch:hover { transform: scale(1.12); }
+
+.theme-swatch.active {
+  border-color: var(--gold-400);
+  box-shadow: 0 0 0 2px rgba(212,167,48,0.3);
+}
+
+.theme-swatch[data-family="forest"] { background: linear-gradient(135deg, #244b6b, #3a799e); }
+.theme-swatch[data-family="ocean"]  { background: linear-gradient(135deg, #0a4a52, #33c6d4); }
+.theme-swatch[data-family="crimson"]{ background: linear-gradient(135deg, #7d1e25, #c8404a); }
+
+.mode-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: var(--text-on-dark);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.mode-toggle-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: rotate(15deg);
+}
+
+@media (max-width: 860px) {
+  .theme-switcher {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    order: 2;
+  }
 }
 
 /* Hamburger */
@@ -253,7 +424,7 @@ body {
   font-size: 11px;
   letter-spacing: 0.08em;
   color: var(--green-600);
-  background: #dceae0;
+  background: var(--badge-green-bg);
   border-bottom: 1px solid var(--border-green);
 }
 
@@ -405,9 +576,9 @@ body {
 }
 
 .match-status.live {
-  background: #f5cece;
+  background: var(--badge-red-bg);
   color: var(--red-600);
-  border: 1px solid #e8a5a5;
+  border: 1px solid var(--badge-red-border);
 }
 
 .match-status.live::before {
@@ -421,9 +592,9 @@ body {
 }
 
 .match-status.upcoming {
-  background: #f5e8c0;
+  background: var(--badge-gold-bg);
   color: var(--amber-600);
-  border: 1px solid #e5cc80;
+  border: 1px solid var(--badge-gold-border);
 }
 
 .match-status.completed {
@@ -688,6 +859,7 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border);
+  margin-top:0.5rem
 }
 
 .scorecard-table thead tr {
@@ -926,7 +1098,7 @@ body {
    PREVIOUS MATCHES
 ═══════════════════════════════════════════════════════════════ */
 .match-result {
-  background: #d8e8dc;
+  background: var(--badge-green-bg);
   border: 1px solid var(--border-green);
   border-left: 4px solid var(--green-600);
   border-radius: var(--radius-md);
@@ -1006,7 +1178,7 @@ body {
   justify-content: space-between;
   padding: 18px 20px;
   background: var(--green-800);
-  color: var(--white);
+  color: var(--text-on-dark);
 }
 
 .public-team-name {
@@ -1015,7 +1187,7 @@ body {
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--text-on-dark);
 }
 
 .public-team-short {
@@ -1078,10 +1250,10 @@ body {
   border-radius: 99px;
 }
 
-.public-player-role.batsman      { color: var(--green-700);  background: #d0e8d8; }
-.public-player-role.bowler       { color: var(--red-600);    background: #f0d0d0; }
-.public-player-role.all-rounder  { color: var(--gold-700);   background: #f0e4c0; }
-.public-player-role.wicket-keeper { color: var(--blue-600);  background: #d8e8f8; }
+.public-player-role.batsman      { color: var(--green-700);  background: var(--badge-green-bg); }
+.public-player-role.bowler       { color: var(--red-600);    background: var(--badge-red-bg); }
+.public-player-role.all-rounder  { color: var(--gold-700);   background: var(--badge-gold-bg); }
+.public-player-role.wicket-keeper { color: var(--blue-600);  background: var(--badge-blue-bg); }
 
 .no-teams-message {
   text-align: center;
@@ -1276,7 +1448,7 @@ body {
 
 .btn-primary {
   background: var(--green-700);
-  color: var(--white);
+  color: var(--text-on-dark);
   box-shadow: 0 1px 4px rgba(30,92,48,0.25);
 }
 
@@ -1288,7 +1460,7 @@ body {
 
 .btn-success {
   background: var(--green-700);
-  color: var(--white);
+  color: var(--text-on-dark);
   box-shadow: 0 1px 4px rgba(30,92,48,0.25);
 }
 
@@ -1299,17 +1471,17 @@ body {
 
 .btn-warning {
   background: var(--amber-600);
-  color: var(--white);
+  color: var(--text-on-dark);
 }
 
 .btn-warning:hover {
-  background: #c16505;
+  background: var(--amber-700);
   transform: translateY(-1px);
 }
 
 .btn-danger {
   background: var(--red-600);
-  color: var(--white);
+  color: var(--text-on-dark);
   box-shadow: 0 1px 4px rgba(185,28,28,0.25);
 }
 
@@ -1331,13 +1503,13 @@ body {
 }
 
 .btn-info {
-  background: #d8e8f8;
+  background: var(--badge-blue-bg);
   color: var(--blue-600);
-  border: 1px solid #a8c8e8;
+  border: 1px solid var(--badge-blue-border);
 }
 
 .btn-info:hover {
-  background: #c0d8f0;
+  background: var(--badge-blue-bg-hover);
   transform: translateY(-1px);
 }
 
@@ -1422,8 +1594,8 @@ body {
 }
 
 .toss-info {
-  background: #f0e4c0;
-  border: 1px solid #d8c070;
+  background: var(--badge-gold-bg);
+  border: 1px solid var(--badge-gold-border);
   border-left: 4px solid var(--gold-500);
   border-radius: var(--radius-md);
   padding: 13px 17px;
@@ -1466,7 +1638,7 @@ body {
   border-radius: var(--radius-lg);
   padding: 20px 26px;
   margin-bottom: 18px;
-  color: var(--white);
+  color: var(--text-on-dark);
 }
 
 .batting-team-info h4 {
@@ -1489,7 +1661,7 @@ body {
   font-family: var(--font-score);
   font-size: clamp(38px, 7vw, 66px);
   font-weight: 700;
-  color: var(--white);
+  color: var(--text-on-dark);
   letter-spacing: -0.03em;
   line-height: 1;
 }
@@ -1554,12 +1726,12 @@ body {
 
 .player-card.striker {
   border-top: 3px solid var(--green-600);
-  background: #d8e8dc;
+  background: var(--badge-green-bg);
 }
 
 .player-card.bowler {
   border-top: 3px solid var(--red-500);
-  background: #f0d0d0;
+  background: var(--badge-red-bg);
 }
 
 .player-label {
@@ -1624,7 +1796,7 @@ body {
 
 .run-btn:hover {
   background: var(--green-700);
-  color: var(--white);
+  color: var(--text-on-dark);
   border-color: var(--green-700);
   box-shadow: var(--shadow-sm);
   transform: translateY(-1px);
@@ -1632,11 +1804,11 @@ body {
 
 .run-btn:active { transform: scale(0.97); }
 
-.run-btn[data-runs="4"] { border-color: #a8c8e8; color: var(--blue-600); }
-.run-btn[data-runs="4"]:hover { background: var(--blue-600); color: var(--white); border-color: var(--blue-600); }
+.run-btn[data-runs="4"] { border-color: var(--badge-blue-border); color: var(--blue-600); }
+.run-btn[data-runs="4"]:hover { background: var(--blue-600); color: var(--text-on-dark); border-color: var(--blue-600); }
 
-.run-btn[data-runs="6"] { border-color: #d8c070; color: var(--gold-600); }
-.run-btn[data-runs="6"]:hover { background: var(--gold-500); color: var(--white); border-color: var(--gold-500); }
+.run-btn[data-runs="6"] { border-color: var(--badge-gold-border); color: var(--gold-600); }
+.run-btn[data-runs="6"]:hover { background: var(--gold-500); color: var(--text-on-dark); border-color: var(--gold-500); }
 
 .extras-buttons {
   display: grid;
@@ -1651,8 +1823,8 @@ body {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: #f0e4c0;
-  border: 1px solid #d8c070;
+  background: var(--badge-gold-bg);
+  border: 1px solid var(--badge-gold-border);
   border-radius: var(--radius-sm);
   color: var(--amber-600);
   padding: 11px 8px;
@@ -1662,7 +1834,7 @@ body {
 
 .extra-btn:hover {
   background: var(--amber-600);
-  color: var(--white);
+  color: var(--text-on-dark);
   border-color: var(--amber-600);
   transform: translateY(-1px);
 }
@@ -1683,8 +1855,8 @@ body {
   flex-wrap: wrap;
   margin: 14px 0;
   padding: 14px 18px;
-  background: #f0d0d0;
-  border: 1px solid #d89090;
+  background: var(--badge-red-bg);
+  border: 1px solid var(--badge-red-border);
   border-left: 4px solid var(--red-600);
   border-radius: var(--radius-md);
 }
@@ -1711,8 +1883,8 @@ body {
 .innings-complete-banner {
   margin: 14px 0;
   padding: 13px 18px;
-  background: #f0e4c0;
-  border: 1px solid #d8c070;
+  background: var(--badge-gold-bg);
+  border: 1px solid var(--badge-gold-border);
   border-left: 4px solid var(--amber-600);
   border-radius: var(--radius-md);
   font-family: var(--font-display);
@@ -1723,8 +1895,8 @@ body {
 }
 
 .last-wicket-notice {
-  background: #f0d0d0;
-  border: 1px solid #d89090;
+  background: var(--badge-red-bg);
+  border: 1px solid var(--badge-red-border);
   border-radius: var(--radius-sm);
   padding: 11px 13px;
   margin-bottom: 12px;
@@ -1787,10 +1959,10 @@ body {
   color: var(--gray-700);
 }
 
-.over-ball.four    { background: #d8e8f8;  border-color: #a8c8e8; color: var(--blue-600); }
-.over-ball.six     { background: #f0e4c0;  border-color: #d8c070; color: var(--gold-700); }
-.over-ball.wicket  { background: #f0d0d0;  border-color: #d89090; color: var(--red-600); font-size: 10px; }
-.over-ball.extra   { background: #f0e4c0;  border-color: #d8c070; color: var(--amber-600); font-size: 9px; }
+.over-ball.four    { background: var(--badge-blue-bg);  border-color: var(--badge-blue-border); color: var(--blue-600); }
+.over-ball.six     { background: var(--badge-gold-bg);  border-color: var(--badge-gold-border); color: var(--gold-700); }
+.over-ball.wicket  { background: var(--badge-red-bg);  border-color: var(--badge-red-border); color: var(--red-600); font-size: 10px; }
+.over-ball.extra   { background: var(--badge-gold-bg);  border-color: var(--badge-gold-border); color: var(--amber-600); font-size: 9px; }
 
 .recent-commentary h4 {
   font-family: var(--font-display);
@@ -2191,7 +2363,7 @@ body {
   padding: 10px 14px;
   background: var(--green-800);
   border-radius: var(--radius-md);
-  color: var(--white);
+  color: var(--text-on-dark);
   font-family: var(--font-score);
   font-size: 13px;
 }
@@ -2201,7 +2373,7 @@ body {
 }
 .public-target {
   flex: 1;
-  color: var(--white);
+  color: var(--text-on-dark);
 }
 
 /* Wide+Wicket / NB+Wicket buttons */
@@ -2213,5 +2385,5 @@ body {
 }
 .extra-btn--wicket:hover {
   background: var(--red-500) !important;
-  color: var(--white) !important;
+  color: var(--text-on-dark) !important;
 }
