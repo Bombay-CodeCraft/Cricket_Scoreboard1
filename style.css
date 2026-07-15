@@ -92,13 +92,6 @@
 
   /* Theme transition */
   --theme-transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-
-  --badge-blue-border:  #a8c8e8;
-  --amber-700:          #c16505;
-  --theme-transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-
-  /* ADD THIS: Dark particles for light mode */
-  --particle-rgb: 0, 0, 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -182,12 +175,6 @@ html[data-theme$="-dark"] {
   --shadow-md: 0 2px 8px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3);
   --shadow-lg: 0 4px 16px rgba(0,0,0,0.45), 0 8px 32px rgba(0,0,0,0.3);
   --shadow-xl: 0 8px 32px rgba(0,0,0,0.5), 0 16px 48px rgba(0,0,0,0.35);
-
-  --badge-blue-bg: #182a3c; --badge-blue-bg-hover: #1f3550;
-  --badge-blue-border: #2f4d6c;
-  
-  /* ADD THIS: White particles for all dark modes */
-  --particle-rgb: 255, 255, 255;
 }
 
 /* Smooth cross-fade whenever the theme changes */
@@ -2399,20 +2386,4 @@ body {
 .extra-btn--wicket:hover {
   background: var(--red-500) !important;
   color: var(--text-on-dark) !important;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PARTICLE BACKGROUND CANVAS
-═══════════════════════════════════════════════════════════════ */
-#netCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;          /* Keeps it firmly behind the scoreboard UI */
-  opacity: 0.4;         /* Adjust this to make particles brighter/dimmer */
-  pointer-events: none; /* Prevents the canvas from blocking button clicks */
-}
-
-/* Hide canvas if user prefers reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  #netCanvas { display: none; }
 }
