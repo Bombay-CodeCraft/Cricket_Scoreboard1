@@ -2596,7 +2596,7 @@ document.getElementById("hard-refresh-btn").addEventListener("click", () => loca
   
     let width, height, nodes;
     const NODE_COUNT = 50; // Slightly reduced from 100 for better mobile scoring performance
-    const LINK_DIST = 100;
+    const LINK_DIST = 80;
   
     // Reads the current theme color from style.css
     function readParticleRGB() {
