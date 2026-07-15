@@ -2275,7 +2275,6 @@ body {
   margin: 0 0 28px 0;
   border-bottom: 2px solid var(--border);
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .gender-tabs::-webkit-scrollbar { display: none; }
@@ -2305,7 +2304,7 @@ body {
 }
 
 .gender-tab.active {
-  color: var(--green-800);
+  color: var(--gray-900); /* CHANGED FROM --green-800 */
   border-bottom-color: var(--gold-400);
   background: transparent;
 }
